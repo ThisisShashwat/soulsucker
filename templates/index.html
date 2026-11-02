@@ -1,0 +1,33 @@
+<!doctype html>
+<title>pienapplegpt</title>
+
+
+<style>body {
+    max-width: 40em;
+    margin: auto;
+    background: #fff3b0
+}</style>
+
+
+<h1>PINEAPPLE GPT :3</h1>
+
+<p>
+    <b>{{ pineapples }} 🍍</b>
+
+    <a href="/earn">aww does the little kitty want more? :3</a>
+
+</p>
+
+
+    {% if q %}
+        <p><b>You:</b> {{ q }}</p>
+    {% endif %}
+
+
+<p style="white-space:pre-wrap">{{ answer }}</p>
+
+
+<form method="post">
+    <input name="q" size="50" required autofocus>
+    <button>Sacrifice!!!!!</button>
+</form>

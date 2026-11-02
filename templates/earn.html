@@ -1,0 +1,37 @@
+<!doctype html>
+<title>pienapplegpt</title>
+<style>body{max-width:40em;margin:auto;background:#fff3b0}.ok{color:green}.no{color:red}.cur{text-decoration:underline}</style>
+<h1>AWW does someone want pineapplees?</h1>
+<p>type <a href="{{ url }}">pineapple's dveloper program license agreement</a> by hand :evil:  5 correct words= 1 pineapple MUHAHAHAHAH 😈😈😈😈😈😈 <a href="/"> < Back</a></p>
+<p><b><span id="pineapples">{{ pineapples }}</span> 🍍</b></p>
+<p><b>&gt; <span id="typed"></span></b></p>
+<p id="tos">{% for w in words %}<span>{{ w }}</span> {% endfor %}</p>
+<script>
+const spans = tos.children;
+let i = 0, buf = "", q = Promise.resolve();
+
+function send(word) {
+  q = q.then(() => fetch("/type", {method: "POST", body: new URLSearchParams({word})}))
+    .then(r => r.text()).then(t => pineapples.textContent = t);
+}
+
+function next() {
+  spans[i].className = buf.toLowerCase() == spans[i].textContent.toLowerCase() ? "ok" : "no";
+  send(buf);
+  buf = "";
+  if (++i == spans.length) q.then(() => location.reload());
+}
+
+document.onkeydown = e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key == " ") {
+    e.preventDefault();
+    if (!buf) return;
+    next();
+  } else if (e.key == "Backspace") buf = buf.slice(0, -1);
+  else if (e.key.length == 1) buf += e.key;
+  else return;
+  typed.textContent = buf;
+  if (spans[i]) spans[i].className = spans[i].textContent.toLowerCase().startsWith(buf.toLowerCase()) ? "cur" : "cur no";
+};
+</script>
